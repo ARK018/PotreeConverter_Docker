@@ -9,24 +9,8 @@ This Docker setup allows you to run PotreeConverter (Linux binary) on Windows to
 
 ## Quick Start
 
-### Method 1: Using the Helper Script (Recommended)
 
-**For Windows:**
-```cmd
-.\convert.bat path\to\your\file.las [output_name]
-```
-
-Example (using default output name "myviewer"):
-```cmd
-.\convert.bat Test.laz
-```
-
-Example with custom output name:
-```cmd
-.\convert.bat C:\data\pointcloud.las my_potree_project
-```
-
-### Method 2: Using Docker Hub Image (No Build Required)
+### Method 1: Using Docker Hub Image (No Build Required)
 
 If you want to use the pre-built image from Docker Hub:
 
@@ -36,41 +20,17 @@ If you want to use the pre-built image from Docker Hub:
    Use: image: akshay627/potree-converter:latest
    ```
 
-2. **Create input and pointclouds directories:**
+2. **Run the conversion:**
    ```cmd
-   mkdir input pointclouds
+   .\convert.bat <Path to input file> <Path to output folder>
    ```
 
-3. **Copy your LAS file to the input directory:**
-   ```cmd
-   copy your_file.las input\
+### Method 2: Manual Docker Commands (Build Locally)
    ```
 
-4. **Run the conversion:**
+1. **Run the conversion:**
    ```cmd
-   docker-compose run --rm potree-converter -i /app/input/your_file.las -o /app/pointclouds/myviewer
-   ```
-
-### Method 3: Manual Docker Commands (Build Locally)
-
-1. **Build the Docker image:**
-   ```cmd
-   docker-compose build
-   ```
-
-2. **Create input and pointclouds directories:**
-   ```cmd
-   mkdir input pointclouds
-   ```
-
-3. **Copy your LAS file to the input directory:**
-   ```cmd
-   copy your_file.las input\
-   ```
-
-4. **Run the conversion:**
-   ```cmd
-   docker-compose run --rm potree-converter -i /app/input/your_file.las -o /app/pointclouds/myviewer
+   .\convert.bat <Path to input file> <Path to output folder>
    ```
 
 ## Directory Structure
@@ -87,20 +47,6 @@ Dhatuveda_Docker/
 └── README.md               # This file
 ```
 
-## PotreeConverter Options
-
-You can pass any PotreeConverter arguments. Common options include:
-
-- `-i <input>` - Input LAS file
-- `-o <output>` - Output directory
-- `--spacing <value>` - Point spacing (default: auto)
-- `--levels <value>` - Number of levels (default: auto)
-- `--format <format>` - Output format (LAZ, LAS, BINARY)
-
-Example with custom options:
-```cmd
-docker-compose run --rm potree-converter -i /app/input/data.las -o /app/pointclouds/custom --spacing 0.1 --levels 5
-```
 
 ## Docker Hub
 
@@ -143,10 +89,3 @@ docker-compose run --rm potree-converter --help
 
 The converted Potree files will be available in the `pointclouds/myviewer/` directory (or your custom output name). You can then serve these files using a web server to view the point cloud in a browser.
 
-## Notes
-
-- The Docker container runs the Linux version of PotreeConverter
-- Input files are mounted read-only for safety
-- Output files are written with proper permissions for Windows access
-- Default output name is `myviewer` - can be customized with second parameter
-- Uses `pointclouds/` directory instead of `output/` for better organization
