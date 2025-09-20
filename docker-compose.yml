@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  potree-converter:
+    build: .    # Comment out - If using pre-built image from Docker Hub comment this out
+    image: potree-converter:latest
+    # image: akshay627/potree-converter:latest
+    container_name: potree-converter
+    volumes:
+      # Mount local directories for input and pointclouds
+      - ./input:/app/input:ro
+      - ./pointclouds:/app/pointclouds
+    working_dir: /app
+    # Override the default command - will be set when running
+    command: ["--help"]
+    
+    # For interactive use
+    stdin_open: true
+    tty: true

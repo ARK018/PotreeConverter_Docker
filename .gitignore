@@ -1,0 +1,35 @@
+# Exclude converted point cloud files
+pointclouds/
+**/pointclouds/
+
+input/
+sample/
+
+# Exclude input LAS files (optional - uncomment if you don't want to share input files)
+# input/
+
+# Exclude large binary files
+*.bin
+*.laz
+*.las
+
+# Docker volumes and temporary files
+.docker/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
